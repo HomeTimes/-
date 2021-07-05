@@ -6,9 +6,11 @@ public class LinkedList {
 		// TODO Auto-generated method stub
           Node  first =new Node(1,"我是第一个node");
           Node  sec =new Node(2,"我是第二个node");
+          Node  three =new Node(3,"我是第3个node");
 		LinkededList linkededList =new LinkededList();
 		linkededList.addreal(first);
-		linkededList.addreal(sec);
+		linkededList.addreal(three);
+		linkededList.addSort(sec);
 		linkededList.showLinkedList();
 	}
 
@@ -22,12 +24,8 @@ class LinkededList{
 //	以添加到尾部的方式
 	
 	public void addreal(Node i){
-
-		
 //		想一下是不是要遍历链表才能添加结点到尾部，条件为null
-		
 //		那么遍历是不是要有一个辅助的结点，才能遍历到尾部
-		
 //		我们不能将头结点来遍历，这样会使head结点的位置发生变化
 		Node temp =head;
 		while(true){
@@ -38,8 +36,39 @@ class LinkededList{
 		}
 	    temp.next=i;
 	}
-	
-//	显示链表
+     public void addSort(Node i){
+    	 Node temp =head;
+    	 if(temp.next == null ){
+    		 temp.next = i;
+    		 return;
+    	 }
+//    	 做个标记，表示在哪个位置插入数据
+    	 boolean flag = false;
+    	 
+//    	 首结点不为空
+    	 while(true){
+//    		 找到最后一个没找到合适的位置
+    		 if(temp.next== null){
+    			 break;
+    		 }
+//    		找到指定位置了
+    		 if(temp.next.id > i.id){
+    			break;
+    		 }else if(temp.next.id == i.id){
+    			 flag = true;
+    		 }
+    		 temp = temp.next;
+    	 }
+    	 
+    	 if(flag){
+    		 System.out.println("数据已存在");
+    	 }else{
+    		 i.next = temp.next;
+    		 temp.next = i; 
+    	 }
+    	 
+     }
+	//	显示链表
 	public void showLinkedList(){
 		Node temp =head;
 //		还要判断 链表是否为空，空的话不向下执行
